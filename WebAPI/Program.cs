@@ -2,6 +2,7 @@ using ApplicationCore.Interfaces;
 using ApplicationCore.Interfaces.Repository;
 using ApplicationCore.Models;
 using Infrastructure.Memory.Repository;
+using Web;
 using WebAPI;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,5 +33,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.Seed();
 app.Run();

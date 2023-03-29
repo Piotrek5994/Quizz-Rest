@@ -4,20 +4,28 @@ namespace WebAPI.Dto
 {
     public class QuizItemDto
     {
-        int Id { get; set; }
+        public int Id { get; set; }
 
-        string Question { get; set; }
+        public string Question { get; set; }
 
-        List<QuizItemDto> Option { get; set; }
+        public List<string> Options { get; set; }
     }
 
-    public static QuizItemDto of(QuizItem quiz)
+    public static QuizItemDto Of(QuizItem quiz)
     {
-        return new QuizItemDto
+        /*List<string> options = new List<string>();
+        options.Add(quiz.CorrectAnswer);
+        options.AddRange(quiz.IncorrectAnswers);
+
+        return new QuizItemDto { Id = quiz.Id, Question = quiz.Question, Options = options };*/
+        return new QuizItemDto()
         {
             Id = quiz.Id,
             Question = quiz.Question,
-            Option = quiz.Option.Select(QuizItemDto.of).ToList()
-        };
+            Options = new List<string>(quiz.IncorrectAnswers)
+            {
+                quiz.CorrectAnswer
+            }
+        }; 
     }
 }

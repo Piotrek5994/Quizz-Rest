@@ -12,9 +12,5 @@ namespace WebAPI.Controllers
         {
             _service = service;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
     }
 }
