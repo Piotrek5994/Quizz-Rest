@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Dto;
 
 namespace WebAPI.Controllers
 {
@@ -11,6 +12,18 @@ namespace WebAPI.Controllers
         public QuizController(IQuizUserService service)
         {
             _service = service;
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public ActionResult<QuizDto> FindById(int id)
+        {
+            var quiz = _service.FindQuizById(id);
+            if (quiz == null)
+            {
+                return NotFound();
+            }
+            return Ok(QuizDto.of(quiz));
+
         }
     }
 }
